@@ -1,0 +1,4 @@
+<page-header></page-header>
+<button nz-button (click)="st.reset()" nzType="primary">重置</button>
+<br />
+<st #st [data]="url" [columns]="columns" [scroll]="{ x: '1300px' }" bordered [page]="page"> </st>
