@@ -71,7 +71,7 @@ export class StartupService {
     // mock
     const app: any = {
       name: `网络安全大脑数据服务`,
-      description: `Ng-zorro admin panel front-end framework`,
+      description: `网络安全大脑数据服务`,
     };
     const user: any = {
       name: 'Admin',
@@ -89,17 +89,36 @@ export class StartupService {
     this.menuService.add([
       {
         text: '首页',
-        group: true,
+        group: false,
+        hideInBreadcrumb: true,
         children: [
           {
             text: '仪表盘',
-            link: '/dashboard',
+            // link: '/dashboard',
             icon: { type: 'icon', value: 'appstore' },
+            children: [
+              {
+                text: '仪表盘',
+                link: '/dashboard',
+                icon: { type: 'icon', value: 'appstore' },
+              },
+            ],
           },
           {
             text: '服务管理',
-            link: '/service-management/service-list',
             icon: { type: 'icon', value: 'api' },
+            children: [
+              {
+                text: 'API服务接口',
+                link: '/service-management/service-list',
+                icon: { type: 'icon', value: 'api' },
+              },
+              {
+                text: '应用服务',
+                link: '/service-management/app-servit',
+                icon: { type: 'icon', value: 'appstore' },
+              },
+            ],
           },
         ],
       },

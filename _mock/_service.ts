@@ -11,6 +11,7 @@ for (let i = 0; i < total; i += 1) {
     callServiceNum: Math.ceil(Math.random() * 10000000000000), //服务调用次数
     status: Math.floor(Math.random() * 10) % 4, // 状态
     createdBy: 'admin', // 创建人
+    serviceClass: Math.floor(Math.random() * 10) % 4, // 状态
     updatedAt: new Date(`2017-07-${Math.floor(i / 2) + 1}`), // 更新日期
     createdAt: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
   });
