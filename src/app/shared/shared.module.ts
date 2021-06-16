@@ -8,10 +8,11 @@ import { DelonFormModule } from '@delon/form';
 
 import { SHARED_DELON_MODULES } from './shared-delon.module';
 import { SHARED_ZORRO_MODULES } from './shared-zorro.module';
+import { DevUIModule } from 'ng-devui';
 
 // #region third libs
 
-const THIRDMODULES: Type<any>[] = [];
+const THIRDMODULES: Type<any>[] = [DevUIModule];
 
 // #endregion
 

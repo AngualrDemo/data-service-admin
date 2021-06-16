@@ -1,15 +1,26 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { STChange, STColumn, STComponent, STData, STPage } from '@delon/abc/st';
 import { SFSchema } from '@delon/form';
 import { ModalHelper, _HttpClient } from '@delon/theme';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ApiServiceAddComponent } from './api-service-add/api-service-add.component';
+import { Router } from '@angular/router';
+import { DialogService } from 'ng-devui/modal';
 @Component({
   selector: 'app-service-management-service-list',
   templateUrl: './service-list.component.html',
+  styles: [
+    `
+      .modal-header {
+        margin: 0;
+      }
+    `,
+  ],
+  encapsulation: ViewEncapsulation.None,
 })
-export class ServiceManagementServiceListComponent implements OnInit {
+export class ServiceManagementServiceListComponent implements OnInit, OnDestroy {
   users: STData[] = [];
   url = `/service-list`;
   searchSchema: SFSchema = {
@@ -135,7 +146,7 @@ export class ServiceManagementServiceListComponent implements OnInit {
               icon: 'edit',
               type: 'modal',
               modal: {
-                // component: DemoModalComponent,
+                component: ApiServiceAddComponent,
               },
               click: (_record, modal) => this.message.success(`重新加载页面，回传值：${JSON.stringify(modal)}`),
             },
@@ -152,7 +163,10 @@ export class ServiceManagementServiceListComponent implements OnInit {
     },
   ];
   page: STPage = { position: 'bottom', showSize: true, total: true };
-  constructor(private message: NzMessageService) {}
+  constructor(private message: NzMessageService, private router: Router, private dialogService: DialogService) {}
+  ngOnDestroy(): void {
+    console.log('ngOnDestroy........................');
+  }
   ngOnInit(): void {
     const data = Array(100)
       .fill({})
@@ -166,7 +180,67 @@ export class ServiceManagementServiceListComponent implements OnInit {
       .pipe(delay(500))
       .subscribe((res) => (this.users = res));
   }
-
+  add(dialogtype?: string) {
+    const results = this.dialogService.open({
+      id: 'dialog-service',
+      width: '80%',
+      maxHeight: '500px',
+      title: '新增API服务',
+      content: ApiServiceAddComponent,
+      dialogtype: 'standard',
+      beforeHidden: () => this.beforeHidden(),
+      backdropCloseable: true,
+      placement: 'top',
+      buttons: [
+        {
+          cssClass: 'primary',
+          text: '保存',
+          handler: ($event: Event) => {
+            results.modalInstance.hide();
+          },
+        },
+      ],
+    });
+  }
+  beforeHidden(): Promise<boolean> {
+    return new Promise((resolve) => {
+      const results = this.dialogService.open({
+        id: 'dialog-service',
+        width: '300px',
+        maxHeight: '600px',
+        title: '',
+        content: '确认保存此页面',
+        backdropCloseable: false,
+        dialogtype: 'warning',
+        buttons: [
+          {
+            cssClass: 'primary',
+            text: 'Save',
+            handler: ($event: Event) => {
+              results.modalInstance.hide();
+              resolve(true);
+            },
+          },
+          {
+            id: 'btn-cancel',
+            cssClass: 'common',
+            text: 'Cancel',
+            handler: ($event: Event) => {
+              results.modalInstance.hide();
+              resolve(false);
+            },
+          },
+        ],
+      });
+    });
+  }
+  // add() : void {
+  //   // this.router.navigateByUrl('/passport/register')
+  //   const url = this.router.serializeUrl(
+  //     this.router.createUrlTree(['/passport/register'])
+  //   );
+  //   window.open(url, '_blank', 'noopener'); // 第三个参数是防止网络钓鱼攻击
+  // }
   change(e: STChange): void {
     console.log(e);
   }

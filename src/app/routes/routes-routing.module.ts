@@ -30,6 +30,20 @@ const routes: Routes = [
         path: 'service-management',
         loadChildren: () => import('./service-management/service-management.module').then((m) => m.ServiceManagementModule),
       },
+      {
+        path: 'purview-management',
+        loadChildren: () => import('./user-manage/user-manage-routing.module').then((m) => m.UserManageRoutingModule),
+      },
+      { path: 'user-manage', loadChildren: () => import('./user-manage/user-manage.module').then((m) => m.UserManageModule) },
+      {
+        path: 'subscribe-manage',
+        loadChildren: () => import('./subscribe-manage/subscribe-manage.module').then((m) => m.SubscribeManageModule),
+      },
+      { path: 'data-manage', loadChildren: () => import('./data-manage/data-manage.module').then((m) => m.DataManageModule) },
+      {
+        path: 'service-monitoring',
+        loadChildren: () => import('./service-monitoring/service-monitoring.module').then((m) => m.ServiceMonitoringModule),
+      },
     ],
   },
   // 空白布局

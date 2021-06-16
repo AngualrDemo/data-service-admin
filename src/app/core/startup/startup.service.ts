@@ -120,6 +120,38 @@ export class StartupService {
               },
             ],
           },
+          {
+            text: '权限管理',
+            icon: { type: 'icon', value: 'setting' },
+            children: [
+              {
+                text: '用户管理',
+                link: '/purview-management/user-list',
+                icon: { type: 'icon', value: 'user' },
+              },
+              {
+                text: '角色管理',
+                link: '/purview-management/role-list',
+                icon: { type: 'icon', value: 'bulb' },
+              },
+            ],
+          },
+          {
+            text: '订阅管理',
+            icon: { type: 'icon', value: 'star' },
+            children: [
+              {
+                text: '待审批',
+                link: '/subscribe-manage/pending-review',
+                icon: { type: 'icon', value: 'clock-circle' },
+              },
+              {
+                text: '已审批',
+                link: '/subscribe-manage/approved-list',
+                icon: { type: 'icon', value: 'check-circle' },
+              },
+            ],
+          },
         ],
       },
     ]);
