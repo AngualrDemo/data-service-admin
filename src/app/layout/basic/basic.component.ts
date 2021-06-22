@@ -7,24 +7,24 @@ import { environment } from '@env/environment';
   selector: 'layout-basic',
   template: `
     <layout-default [options]="options" [asideUser]="asideUserTpl" [content]="contentTpl">
-      <layout-default-header-item direction="left">
+      <!-- <layout-default-header-item direction="left">
         <a layout-default-header-item-trigger href="//github.com/ng-alain/ng-alain" target="_blank">
           <i nz-icon nzType="github"></i>
         </a>
-      </layout-default-header-item>
-      <layout-default-header-item direction="left" hidden="mobile">
+      </layout-default-header-item> -->
+      <!-- <layout-default-header-item direction="left" hidden="mobile">
         <a layout-default-header-item-trigger routerLink="/passport/lock">
           <i nz-icon nzType="lock"></i>
         </a>
-      </layout-default-header-item>
-      <layout-default-header-item direction="left" hidden="pc">
+      </layout-default-header-item> -->
+      <!-- <layout-default-header-item direction="left" hidden="pc">
         <div layout-default-header-item-trigger (click)="searchToggleStatus = !searchToggleStatus">
           <i nz-icon nzType="search"></i>
         </div>
-      </layout-default-header-item>
-      <layout-default-header-item direction="middle">
+      </layout-default-header-item> -->
+      <!-- <layout-default-header-item direction="middle">
         <header-search class="alain-default__search" [toggleChange]="searchToggleStatus"></header-search>
-      </layout-default-header-item>
+      </layout-default-header-item> -->
       <layout-default-header-item direction="right" hidden="mobile">
         <div layout-default-header-item-trigger nz-dropdown [nzDropdownMenu]="settingsMenu" nzTrigger="click" nzPlacement="bottomRight">
           <i nz-icon nzType="setting"></i>
@@ -64,7 +64,7 @@ import { environment } from '@env/environment';
     </layout-default>
 
     <setting-drawer *ngIf="showSettingDrawer"></setting-drawer>
-    <theme-btn></theme-btn>
+    <!-- <theme-btn></theme-btn> -->
   `,
 })
 export class LayoutBasicComponent {

@@ -84,7 +84,9 @@ export class StartupService {
     // User information: including name, avatar, email address
     this.settingService.setUser(user);
     // ACL: Set the permissions to full, https://ng-alain.com/acl/getting-started
-    this.aclService.setFull(true);
+    this.aclService.setFull(false);
+    this.aclService.setRole(['user']);
+    this.aclService.attachAbility([1, 2, 3]);
     // Menu data, https://ng-alain.com/theme/menu
     this.menuService.add([
       {
@@ -95,60 +97,64 @@ export class StartupService {
           {
             text: '仪表盘',
             // link: '/dashboard',
+            acl: ['user'],
             icon: { type: 'icon', value: 'appstore' },
-            children: [
-              {
-                text: '仪表盘',
-                link: '/dashboard',
-                icon: { type: 'icon', value: 'appstore' },
-              },
-            ],
           },
           {
             text: '服务管理',
-            icon: { type: 'icon', value: 'api' },
+            icon: { type: 'class', value: 'iconfont icon-xingzhuangjiehe' },
             children: [
               {
                 text: 'API服务接口',
                 link: '/service-management/service-list',
-                icon: { type: 'icon', value: 'api' },
+                icon: { type: 'class', value: 'iconfont icon-fuwujiekou' },
               },
               {
                 text: '应用服务',
                 link: '/service-management/app-servit',
-                icon: { type: 'icon', value: 'appstore' },
+                icon: { type: 'class', value: 'iconfont icon-yingyongfuwu' },
+              },
+            ],
+          },
+          {
+            text: '数据管理',
+            link: '/data-manage/data-set-list',
+            icon: { type: 'class', value: 'iconfont icon-shujujiguanli' },
+          },
+          {
+            text: '服务监控',
+            icon: { type: 'class', value: 'iconfont icon-fuwujiankong' },
+            link: '/service-monitoring/service-monitoring-list',
+          },
+          {
+            text: '订阅管理',
+            icon: { type: 'class', value: 'iconfont icon-dingyueguanlitubiao' },
+            children: [
+              {
+                text: '待审批',
+                link: '/subscribe-manage/pending-review',
+                icon: { type: 'class', value: 'iconfont icon-daishenpi' },
+              },
+              {
+                text: '已审批',
+                link: '/subscribe-manage/approved-list',
+                icon: { type: 'class', value: 'iconfont icon-yishenpi' },
               },
             ],
           },
           {
             text: '权限管理',
-            icon: { type: 'icon', value: 'setting' },
+            icon: { type: 'class', value: 'iconfont icon-quanxianguanli' },
             children: [
               {
                 text: '用户管理',
                 link: '/purview-management/user-list',
-                icon: { type: 'icon', value: 'user' },
+                icon: { type: 'class', value: 'iconfont icon-user' },
               },
               {
                 text: '角色管理',
                 link: '/purview-management/role-list',
-                icon: { type: 'icon', value: 'bulb' },
-              },
-            ],
-          },
-          {
-            text: '订阅管理',
-            icon: { type: 'icon', value: 'star' },
-            children: [
-              {
-                text: '待审批',
-                link: '/subscribe-manage/pending-review',
-                icon: { type: 'icon', value: 'clock-circle' },
-              },
-              {
-                text: '已审批',
-                link: '/subscribe-manage/approved-list',
-                icon: { type: 'icon', value: 'check-circle' },
+                icon: { type: 'class', value: 'iconfont icon-jiaoseguanli' },
               },
             ],
           },

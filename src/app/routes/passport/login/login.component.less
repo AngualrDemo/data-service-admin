@@ -2,7 +2,11 @@
 :host {
   display: block;
   width: 368px;
-  margin: 0 auto;
+  margin-right: 58px;
+  margin-left: auto;
+  padding: 15px 25px;
+  background: #fff;
+  border-radius: 5px;
   ::ng-deep {
     .ant-tabs .ant-tabs-bar {
       margin-bottom: 24px;
@@ -25,17 +29,6 @@
       transition: color 0.3s;
       &:hover {
         color: @primary-color;
-      }
-    }
-    .other {
-      margin-top: 24px;
-      line-height: 22px;
-      text-align: left;
-      nz-tooltip {
-        vertical-align: middle;
-      }
-      .register {
-        float: right;
       }
     }
   }

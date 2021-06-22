@@ -56,7 +56,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.less", "node_modules/ng-devui/devui.min.css"],
+            "styles": ["src/styles.less", "node_modules/ng-devui/devui.min.css", "src/assets/iconfont/iconfont.css"],
             "scripts": [],
             "allowedCommonJsDependencies": ["@antv/g2", "ajv", "ajv-formats", "date-fns", "file-saver"]
           },
@@ -116,7 +116,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.less", "node_modules/ng-devui/devui.min.css"],
+            "styles": ["src/styles.less", "node_modules/ng-devui/devui.min.css", "src/assets/iconfont/iconfont.css"],
             "scripts": []
           }
         },
