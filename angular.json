@@ -56,7 +56,14 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.less", "node_modules/ng-devui/devui.min.css", "src/assets/iconfont/iconfont.css"],
+            "styles": [
+              "src/styles.less",
+              "node_modules/ng-devui/devui.min.css",
+              "src/assets/iconfont/iconfont.css",
+              "node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css"
+            ],
             "scripts": [],
             "allowedCommonJsDependencies": ["@antv/g2", "ajv", "ajv-formats", "date-fns", "file-saver"]
           },
@@ -78,8 +85,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "3mb"
+                  "maximumWarning": "6mb",
+                  "maximumError": "6mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -116,7 +123,14 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.less", "node_modules/ng-devui/devui.min.css", "src/assets/iconfont/iconfont.css"],
+            "styles": [
+              "src/styles.less",
+              "node_modules/ng-devui/devui.min.css",
+              "src/assets/iconfont/iconfont.css",
+              "node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css"
+            ],
             "scripts": []
           }
         },

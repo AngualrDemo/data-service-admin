@@ -10,9 +10,27 @@ import { SHARED_DELON_MODULES } from './shared-delon.module';
 import { SHARED_ZORRO_MODULES } from './shared-zorro.module';
 import { DevUIModule } from 'ng-devui';
 
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { TreeTableModule } from 'primeng/treetable';
+import { NgJsonEditorModule } from 'ang-jsoneditor';
 // #region third libs
 
-const THIRDMODULES: Type<any>[] = [DevUIModule];
+const THIRDMODULES: Type<any>[] = [
+  DevUIModule,
+  NgJsonEditorModule,
+  TreeTableModule,
+  ButtonModule,
+  DialogModule,
+  MultiSelectModule,
+  InputTextModule,
+  ToastModule,
+  ContextMenuModule,
+];
 
 // #endregion
 

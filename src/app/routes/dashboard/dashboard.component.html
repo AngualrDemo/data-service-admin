@@ -11,3 +11,43 @@
 <button [acl]="{ ability: [8] }">8</button>
 <button [acl]="{ ability: [9] }">9</button>
 <button [acl]="{ ability: [0] }">0</button>
+
+<p-treeTable [value]="files" [columns]="cols" styleClass="p-treetable-sm">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{ col.header }}
+      </th>
+      <th style="width: 8rem">
+        <p-button icon="pi pi-cog"></p-button>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns; let i = index" ttEditableColumn [ngClass]="{ 'p-toggler-column': i === 0 }">
+        <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
+        <p-treeTableCellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="rowData[col.field]" />
+          </ng-template>
+          <ng-template pTemplate="output">{{ rowData[col.field] }}</ng-template>
+        </p-treeTableCellEditor>
+      </td>
+      <td>
+        <p-button icon="pi pi-search" styleClass="p-button-success" [style]="{ 'margin-right': '.5em' }"></p-button>
+        <p-button icon="pi pi-pencil" styleClass="p-button-warning" (click)="add(rowNode)"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-treeTable>
+<button nz-button nzType="primary" (click)="save()">保存</button>
+<button nz-button nzType="primary" (click)="add()">add</button>
+
+<div style="height: 600px">
+  <json-editor [options]="editorOptions" (jsonChange)="changeLog($event)" [data]="data" #editor></json-editor>
+</div>
+
+<div id="container"></div>
+
+<div id="c1"></div>

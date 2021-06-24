@@ -1,5 +1,102 @@
 import { MockRequest } from '@delon/mock';
 
+const files = {
+  data: [
+    {
+      data: {
+        name: 'list',
+        size: '200mb',
+        type: 'Array',
+      },
+      children: [
+        {
+          data: {
+            name: 'listObj',
+            size: '25mb',
+            type: 'object',
+          },
+          children: [
+            {
+              data: {
+                name: 'age',
+                size: '10mb',
+                type: 'string',
+              },
+            },
+            {
+              data: {
+                name: 'name',
+                size: '10mb',
+                type: 'string',
+              },
+            },
+            {
+              data: {
+                name: 'sex',
+                size: '5mb',
+                type: 'string',
+              },
+            },
+          ],
+        },
+        {
+          data: {
+            name: 'editor.app',
+            size: '25mb',
+            type: 'object',
+          },
+          children: [
+            {
+              data: {
+                name: 'angular.app',
+                size: '10mb',
+                type: 'Application',
+              },
+            },
+            {
+              data: {
+                name: 'cli.app',
+                size: '10mb',
+                type: 'Application',
+              },
+            },
+            {
+              data: {
+                name: 'mobile.app',
+                size: '5mb',
+                type: 'Application',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
+      data: {
+        name: 'params',
+        size: '20mb',
+        type: 'object',
+      },
+      children: [
+        {
+          data: {
+            name: 'backup-1.zip',
+            size: '10mb',
+            type: 'Zip',
+          },
+        },
+        {
+          data: {
+            name: 'backup-2.zip',
+            size: '10mb',
+            type: 'Zip',
+          },
+        },
+      ],
+    },
+  ],
+};
+
 const list: any[] = [];
 const appList: any[] = [];
 const total = 50;
@@ -80,4 +177,5 @@ export const SERVICE = {
   '/service-list': (req: MockRequest) => genServiceData(req.queryString),
   '/app-service-list': (req: MockRequest) => genAppServiceData(req.queryString),
   '/get-dic-list': (req: MockRequest) => getServiceClass(),
+  'parms/list': (req: MockRequest) => files.data,
 };
