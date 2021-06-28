@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { STChange, STColumn, STComponent, STData, STPage } from '@delon/abc/st';
 import { SFSchema } from '@delon/form';
 import { ModalHelper, _HttpClient } from '@delon/theme';
@@ -8,17 +8,13 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { ApiServiceAddComponent } from './api-service-add/api-service-add.component';
 import { Router } from '@angular/router';
 import { DialogService } from 'ng-devui/modal';
+import { DocumentRef } from 'ng-devui/window-ref';
+import { ApiServiceDetailComponent } from './api-service-detail/api-service-detail.component';
+
+/** api(接口)服务  列表页面*/
 @Component({
   selector: 'app-service-management-service-list',
   templateUrl: './service-list.component.html',
-  styles: [
-    `
-      .modal-header {
-        margin: 0;
-      }
-    `,
-  ],
-  encapsulation: ViewEncapsulation.None,
 })
 export class ServiceManagementServiceListComponent implements OnInit, OnDestroy {
   users: STData[] = [];
@@ -139,7 +135,9 @@ export class ServiceManagementServiceListComponent implements OnInit, OnDestroy 
             {
               text: `详情`,
               icon: 'file',
-              click: (record) => this.message.error(`${record.id === 1 ? `过期` : `正常`}【${record.name}】`),
+              click: (record) => {
+                this.onDetail(record);
+              },
             },
             {
               text: '编辑',
@@ -163,7 +161,15 @@ export class ServiceManagementServiceListComponent implements OnInit, OnDestroy 
     },
   ];
   page: STPage = { position: 'bottom', showSize: true, total: true };
-  constructor(private message: NzMessageService, private router: Router, private dialogService: DialogService) {}
+  // 华为组件弹框
+  scrollTop: number;
+  constructor(
+    private message: NzMessageService,
+    private router: Router,
+    private dialogService: DialogService,
+    private documentRef: DocumentRef,
+    private renderer: Renderer2,
+  ) {}
   ngOnDestroy(): void {
     console.log('ngOnDestroy........................');
   }
@@ -201,6 +207,50 @@ export class ServiceManagementServiceListComponent implements OnInit, OnDestroy 
         },
       ],
     });
+  }
+  onDetail(_record) {
+    console.log(_record);
+    this.setHtmlStyle();
+    const results = this.dialogService.open({
+      id: 'dialog-service-detail',
+      width: '80%',
+      maxHeight: '500px',
+      title: 'api服务详情',
+      content: ApiServiceDetailComponent,
+      dialogtype: 'standard',
+      // beforeHidden: () => this.beforeHidden(),
+      backdropCloseable: true,
+      placement: 'top',
+      onClose: () => {
+        this.removeHtmlStyle();
+        console.log('on dialog closed');
+      },
+      buttons: [
+        {
+          cssClass: 'primary',
+          text: '关闭',
+          handler: ($event: Event) => {
+            console.log('关闭');
+            results.modalInstance.hide();
+          },
+        },
+      ],
+    });
+  }
+  setHtmlStyle() {
+    this.scrollTop = document.documentElement.scrollTop;
+    this.renderer.setStyle(this.documentRef.documentElement, 'top', `-${this.scrollTop}px`);
+    this.renderer.setStyle(this.documentRef.documentElement, 'position', 'fixed');
+    this.renderer.setStyle(this.documentRef.documentElement, 'width', `100%`);
+    this.renderer.setStyle(this.documentRef.documentElement, 'overflow-y', `scroll`);
+  }
+
+  removeHtmlStyle() {
+    this.renderer.removeStyle(this.documentRef.documentElement, 'position');
+    this.renderer.removeStyle(this.documentRef.documentElement, 'width');
+    this.renderer.removeStyle(this.documentRef.documentElement, 'overflow');
+    this.renderer.removeStyle(this.documentRef.documentElement, 'top');
+    document.documentElement.scrollTop = this.scrollTop;
   }
   beforeHidden(): Promise<boolean> {
     return new Promise((resolve) => {

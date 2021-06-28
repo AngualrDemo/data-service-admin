@@ -76,8 +76,12 @@ export class DashboardComponent implements OnInit {
   }
 
   initEditorOptions(editorOptions) {
-    // this.editorOptions.mode = 'code'; // set only one mode
-    editorOptions.modes = ['code', 'text', 'tree', 'view']; // set all allowed modes
+    editorOptions.mode = 'preview'; // set only one mode
+    editorOptions.mainMenuBar = false; // 添加主菜单栏 - 包含格式、排序、转换、搜索等功能。true默认。适用于所有类型的mode.
+    editorOptions.search = false;
+    editorOptions.navigationBar = false;
+    editorOptions.statusBar = false;
+    // editorOptions.modes = ['code', 'text', 'tree', 'view', 'form', 'preview']; // set all allowed modes
     // this.editorOptions.ace = (<any>window).ace.edit('editor');
   }
   ngOnInit() {

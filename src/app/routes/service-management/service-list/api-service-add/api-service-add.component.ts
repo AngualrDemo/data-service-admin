@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { SFSchema, SFSelectWidgetSchema } from '@delon/form';
+import { SFSchema, SFSelectWidgetSchema, SFUploadWidgetSchema } from '@delon/form';
+import { NzMessageService } from 'ng-zorro-antd/message';
 interface TreeNodeInterface {
   key: string;
   name: string;
@@ -11,6 +12,8 @@ interface TreeNodeInterface {
   children?: TreeNodeInterface[];
   parent?: TreeNodeInterface;
 }
+
+/** api(接口)服务  新增API接口服务*/
 @Component({
   selector: 'app-api-service-add',
   templateUrl: './api-service-add.component.html',
@@ -103,6 +106,30 @@ export class ApiServiceAddComponent implements OnInit {
           },
         },
       },
+      file: {
+        type: 'string',
+        title: '接口图标',
+        enum: [
+          {
+            uid: -1,
+            name: 'xxx.png',
+            status: 'done',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+            response: {
+              resource_id: 1,
+            },
+          },
+        ],
+        ui: {
+          widget: 'upload',
+          action: '/upload',
+          resReName: 'resource_id',
+          urlReName: 'url',
+          listType: 'picture-card',
+          limitFileCount: 1,
+          fileType: 'image/png,image/jpeg,image/gif,image/bmp',
+        } as SFUploadWidgetSchema,
+      },
     },
     ui: {
       spanLabelFixed: 100,
@@ -113,7 +140,7 @@ export class ApiServiceAddComponent implements OnInit {
     required: ['name', 'status', 'remark', 'dataSource', 'requestType', 'path', 'requestClass'],
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public msg: NzMessageService) {}
 
   ngOnInit() {
     this.listOfMapData.forEach((item) => {

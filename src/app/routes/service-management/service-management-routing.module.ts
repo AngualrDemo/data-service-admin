@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'api-service-add', component: ApiServiceAddComponent },
 ];
 
+/** api服务管理，routes配置 */
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],

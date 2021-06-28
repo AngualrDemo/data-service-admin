@@ -1,0 +1,14 @@
+<!-- <sv-container>
+    <sv-title>数据集基本信息</sv-title>
+    <sv label="数据集名称">数据集名称</sv>
+    <sv label="描述">asdf</sv>
+    <sv label="数据集分类">25</sv>
+    <sv label="数据来源"> OMG </sv>
+    <sv-title>字段探查</sv-title>
+</sv-container> -->
+<!-- <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)" [button]="button"></sf> -->
+<button nz-button nzType="primary">开始探查</button>
+<button nz-button>导入模板</button>
+<button nz-button>导出模板</button>
+<button nz-button>创建物理表</button>
+<st #st [data]="url" [columns]="columns"></st>
