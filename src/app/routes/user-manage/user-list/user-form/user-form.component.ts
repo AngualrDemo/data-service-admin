@@ -1,62 +1,39 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { SFSchema, SFSelectWidgetSchema, SFTreeSelectWidgetSchema } from '@delon/form';
-import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { SFSchema, SFSelectWidgetSchema, SFUploadWidgetSchema } from '@delon/form';
 
-/** app(应用)服务  新增应用*/
+/** 新增用户  */
 @Component({
-  selector: 'app-app-service-form',
-  templateUrl: './app-service-form.component.html',
+  selector: 'app-user-form',
+  templateUrl: './user-form.component.html',
   styles: [],
 })
-export class AppServiceFormComponent implements OnInit {
+export class UserFormComponent implements OnInit {
+  /** 新增用户的json schema 配置 */
   schema: SFSchema = {
     properties: {
-      // 异步数据
-      async: {
-        type: 'string',
-        title: 'Async',
-        enum: [
-          { title: '待支付', key: 'WAIT_BUYER_PAY' },
-          { title: '已支付', key: 'TRADE_SUCCESS' },
-          { title: '交易完成', key: 'TRADE_FINISHED' },
-        ],
-        ui: {
-          widget: 'tree-select',
-          virtualHeight: '300px',
-          expandChange: () => {
-            return of([
-              { title: '待支付', key: 'WAIT_BUYER_PAY' },
-              { title: '已支付', key: 'TRADE_SUCCESS' },
-              { title: '交易完成', key: 'TRADE_FINISHED' },
-            ]).pipe(delay(10));
-          },
-        } as SFTreeSelectWidgetSchema,
-      },
       name: {
         type: 'string',
-        title: 'API服务名称',
-        minLength: 3,
+        title: '账号名',
+        minLength: 4,
+        maxLength: 20,
         ui: {
-          optionalHelp: 'API服务名称',
-          placeholder: '请输入API服务名称',
+          placeholder: '请输入账号名',
         },
       },
       path: {
         type: 'string',
-        title: '请求路径',
-        minLength: 3,
+        title: '密码',
+        minLength: 8,
+        maxLength: 16,
         ui: {
-          grid: {
-            span: 16,
-          },
-          placeholder: '请输入API服务请求路径',
+          type: 'password',
+          placeholder: '请输入密码',
         },
       },
       requestClass: {
         type: 'string',
-        title: '请求方法',
+        title: '用户所属角色',
         enum: [
           { label: 'GET', value: 'WAIT_BUYER_PAY', otherData: 1 },
           { label: 'PUT', value: 'TRADE_SUCCESS' },
@@ -69,7 +46,7 @@ export class AppServiceFormComponent implements OnInit {
       },
       requestType: {
         type: 'string',
-        title: '请求方式',
+        title: '用户所属公安部门',
         enum: [
           { label: 'API网关', value: 'WAIT_BUYER_PAY', otherData: 1 },
           { label: '服务接口', value: 'TRADE_SUCCESS' },
@@ -82,7 +59,7 @@ export class AppServiceFormComponent implements OnInit {
       },
       status: {
         type: 'string',
-        title: '服务分类',
+        title: '用户姓名',
         default: 'WAIT_BUYER_PAY',
         ui: {
           widget: 'select',
@@ -95,7 +72,7 @@ export class AppServiceFormComponent implements OnInit {
 
       dataSource: {
         type: 'string',
-        title: '数据来源',
+        title: '用户单位',
         enum: [
           { label: '本地安全数据', value: 'WAIT_BUYER_PAY', otherData: 1 },
           { label: '360云端数据（异步）', value: 'TRADE_SUCCESS' },
@@ -115,6 +92,16 @@ export class AppServiceFormComponent implements OnInit {
           grid: {
             span: 24,
           },
+        },
+      },
+      userKey: {
+        type: 'string',
+        title: '用户秘钥',
+        minLength: 3,
+        readOnly: true,
+        ui: {
+          optionalHelp: '系统自动生成的36位随机字串，用于API调用时使用',
+          placeholder: '系统自动生成',
         },
       },
     },

@@ -153,7 +153,8 @@ export class StartupService {
               },
               {
                 text: '角色管理',
-                link: '/purview-management/role-list',
+                externalLink: 'http://www.baidu.com',
+                target: '_blank',
                 icon: { type: 'class', value: 'iconfont icon-jiaoseguanli' },
               },
             ],

@@ -44,26 +44,26 @@ import { environment } from '@env/environment';
         <header-user></header-user>
       </layout-default-header-item>
       <ng-template #asideUserTpl>
-        <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="alain-default__aside-user">
+        <!-- <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="alain-default__aside-user">
           <nz-avatar class="alain-default__aside-user-avatar" [nzSrc]="user.avatar"></nz-avatar>
           <div class="alain-default__aside-user-info">
             <strong>{{ user.name }}</strong>
             <p class="mb0">{{ user.email }}</p>
           </div>
-        </div>
-        <nz-dropdown-menu #userMenu="nzDropdownMenu">
+        </div> -->
+        <!-- <nz-dropdown-menu #userMenu="nzDropdownMenu">
           <ul nz-menu>
             <li nz-menu-item routerLink="/pro/account/center">个人中心</li>
             <li nz-menu-item routerLink="/pro/account/settings">个人设置</li>
           </ul>
-        </nz-dropdown-menu>
+        </nz-dropdown-menu> -->
       </ng-template>
       <ng-template #contentTpl>
         <router-outlet></router-outlet>
       </ng-template>
     </layout-default>
 
-    <setting-drawer *ngIf="showSettingDrawer"></setting-drawer>
+    <!-- <setting-drawer *ngIf="showSettingDrawer"></setting-drawer> -->
     <!-- <theme-btn></theme-btn> -->
   `,
 })
